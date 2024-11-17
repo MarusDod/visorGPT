@@ -1,0 +1,23 @@
+{
+  "folders": [
+    {
+      "name": "frontend",
+      "path": "./vite"
+    },
+    {
+      "name": "backend",
+      "path": "./express"
+    }
+  ],
+  "settings": {},
+  "launch": {
+    "configurations": [
+      {
+        "type": "chrome",
+        "name": "ws://127.0.0.1:9229/fd19541b-c287-4127-a7c9-0779fbbdd437",
+        "request": "launch",
+        "url": "ws://127.0.0.1:9229/fd19541b-c287-4127-a7c9-0779fbbdd437"
+      }
+    ]
+  }
+}
