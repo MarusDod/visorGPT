@@ -7,7 +7,8 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 .yarn/install-state.gz
-.env.*
+.env.development
+.env.production
 
 node_modules
 dist
