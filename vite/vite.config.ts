@@ -15,4 +15,10 @@ export default defineConfig({
       assets: "/src/assets",
     },
   },
+  server:{
+    port: 5173
+  },
+  preview:{
+    port: 5173
+  }
 });

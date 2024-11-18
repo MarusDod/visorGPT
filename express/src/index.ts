@@ -21,7 +21,7 @@ app.get("/", (_, res) => {
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ["*"],
+    origin: ["http://localhost:5173", "https://visorgpt-vite.onrender.com"],
     credentials: true,
   })
 );

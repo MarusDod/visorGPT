@@ -22,6 +22,7 @@ loginRouter.get("/getTemporaryGuest", async (req, res) => {
     }).populate("guest");
 
     if (token) {
+      res.cookie("authorization", token._id);
       res.status(200).json(token);
       return;
     }
@@ -29,6 +30,7 @@ loginRouter.get("/getTemporaryGuest", async (req, res) => {
 
   const guest = await GuestModel.create({});
   token = await SessionTokenModel.create({ guest: guest._id });
+  res.cookie("authorization", token._id);
 
   res.json({
     ...token.toObject(),
