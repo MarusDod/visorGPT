@@ -8,7 +8,6 @@ import cookieParser from "cookie-parser";
 import { authMiddleware } from "./middleware";
 import { env } from "./services/env";
 import cors from "cors";
-import { database } from "./services/mongoose";
 import mongoose from "mongoose";
 
 const app = express();
@@ -22,7 +21,7 @@ app.get("/", (_, res) => {
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ["*/*"],
+    origin: ["http://localhost:5174", "https://visorgpt-vite.onrender.com/"],
     credentials: true,
   })
 );

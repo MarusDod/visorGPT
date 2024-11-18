@@ -11,6 +11,7 @@ axiosInstance.defaults.validateStatus = (status) =>
   status >= 200 && status <= 500;
 
 axiosInstance.defaults.headers["post"]["Content-Type"] = "application/json";
+axiosInstance.defaults.headers["common"]["Access-Control-Allow-Origin"] = "*";
 axiosInstance.defaults.headers["common"]["Accept"] =
   "application/json; charset=utf-8";
 
