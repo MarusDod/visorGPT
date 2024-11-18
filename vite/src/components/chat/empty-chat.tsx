@@ -28,9 +28,9 @@ export default function EmptyChat() {
   useDocumentTitle();
 
   return (
-    <div className="flex flex-col justify-center items-center h-full w-full gap-[16px] p-[16px]">
-      <span className="text-center font-bold text-[32px]">Ask away</span>
-      <InputBox onSubmit={startChat} />
+    <div className="flex flex-col justify-center items-center h-full w-full max-w-[1200px] gap-[16px] p-[16px]">
+      <span className="text-center font-bold text-[40px]">Ask away</span>
+      <InputBox className="text-[18px]" onSubmit={startChat} />
     </div>
   );
 }

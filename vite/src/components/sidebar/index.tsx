@@ -59,7 +59,7 @@ export function Sidebar({ onClose }: { onClose: () => any }) {
   return (
     <div
       className={
-        "h-full w-[30%] py-[12px] px-[16px] bg-slate-600 overflow-hidden flex flex-shrink-0 flex-col transition-[max-width] duration-300 ease-out"
+        "h-full w-[300px] py-[12px] px-[16px] bg-slate-600 overflow-hidden flex flex-shrink-0 flex-col transition-[max-width] duration-300 ease-out"
       }
     >
       <div className="flex justify-between items-center">

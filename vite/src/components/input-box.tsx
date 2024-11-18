@@ -3,9 +3,11 @@ import StopCircleIcon from "@mui/icons-material/StopCircle";
 
 export default function InputBox({
   onSubmit,
+  className,
   isGenerating = false,
   stopGenerating,
 }: {
+  className?: string;
   onSubmit: (text: string) => any;
   isGenerating?: boolean;
   stopGenerating?: () => any;
@@ -47,7 +49,7 @@ export default function InputBox({
             ev.currentTarget.style.height =
               ev.currentTarget.scrollHeight + "px";
           }}
-          className="bg-inherit text-start ml-[24px] text-white text-base outline-none w-[80%] placeholder:text-gray-400 resize-none leading-tight text-wrap break-words overflow-auto max-h-[140px]"
+          className={`bg-inherit text-start ml-[24px] text-white text-base outline-none w-[80%] placeholder:text-gray-400 resize-none leading-tight text-wrap break-words overflow-auto max-h-[140px] ${className}`}
         />
         {!isGenerating ? (
           <button type={"submit"} className="contents">
