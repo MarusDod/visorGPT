@@ -93,8 +93,8 @@ export default function SidebarEntry({
   return (
     <>
       <span
-        onClick={() => navigate(`/${chat._id}`)}
-        className={`flex min-w-0 flex-nowrap overflow-hidden items-center justify-between w-full text-left py-[16px] px-[4px] cursor-pointer relative whitespace-nowrap rounded-md hover:cursor-pointer hover:bg-white hover:bg-opacity-10 ${
+        onClick={() => navigate(`?chatId=${chat._id}`)}
+        className={`flex min-w-0 flex-nowrap overflow-hidden items-center justify-between w-full text-left py-[10px] px-[4px] cursor-pointer relative whitespace-nowrap rounded-md hover:cursor-pointer hover:bg-white hover:bg-opacity-10 ${
           isSelected ? "bg-white bg-opacity-10" : ""
         }`}
       >

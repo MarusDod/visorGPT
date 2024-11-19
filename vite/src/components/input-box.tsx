@@ -37,7 +37,7 @@ export default function InputBox({
         }
       }}
     >
-      <div className="rounded-[26px] p-2 bg-gray-600 m-0 w-full flex flex-row justify-start items-center overflow-auto h-fit">
+      <div className="rounded-[26px] p-2 bg-gray-600 m-0 w-[90%] flex flex-row justify-start items-center overflow-auto h-fit">
         <textarea
           name="text"
           placeholder="Message VisorGPT"

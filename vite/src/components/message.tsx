@@ -45,7 +45,7 @@ const MessageComponent = forwardRef(function (
       )}
       <div
         ref={ref}
-        className={`whitespace-pre text-wrap rounded-[1.5rem] font-sans text-[1.2rem] text-white w-auto py-[8px] px-[16px] ${
+        className={`whitespace-pre text-wrap rounded-[1.5rem] font-sans text-[1.1rem] text-white w-auto py-[8px] px-[16px] ${
           role === AgentRole.User
             ? "self-end text-right bg-gray-600"
             : "self-start text-left"

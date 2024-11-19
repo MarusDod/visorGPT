@@ -1,5 +1,4 @@
 import axios from "axios";
-import Cookies from "js-cookie";
 
 export const axiosInstance = axios.create({
   withCredentials: true,
@@ -13,10 +12,3 @@ axiosInstance.defaults.validateStatus = (status) =>
 axiosInstance.defaults.headers["post"]["Content-Type"] = "application/json";
 axiosInstance.defaults.headers["common"]["Accept"] =
   "application/json; charset=utf-8";
-
-axiosInstance.interceptors.request.use((config) => {
-  Cookies.set("authorization", sessionStorage.getItem("token") || "", {
-    sameSite: "strict",
-  });
-  return config;
-});

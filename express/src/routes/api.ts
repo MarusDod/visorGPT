@@ -2,10 +2,9 @@ import express from "express";
 import { z } from "zod";
 import { objectIdSchema } from "../utils";
 import { ChatModel } from "../schemas/chat";
-import mongoose, { Types } from "mongoose";
+import { Types } from "mongoose";
 import { GuestModel } from "../schemas/guest";
 import { completionRouter } from "./completion";
-import { database } from "../services/mongoose";
 
 export const apiRouter = express.Router();
 
@@ -31,7 +30,7 @@ apiRouter.get("/guestChats", async (req, res) => {
   });
 
   if (!guest) {
-    res.status(404);
+    res.status(404).send("invalid guest");
     return;
   }
 
@@ -43,7 +42,7 @@ apiRouter.get("/guestChats", async (req, res) => {
     .parse(req.query);
 
   const chats = await ChatModel.find(
-    { createdBy: guest._id, archived: { $ne: true } },
+    { createdBy: guest._id, summary: { $ne: "" }, archived: { $ne: true } },
     { messages: 0, createdBy: 0 }
   )
     .sort({ createdAt: -1 })
@@ -63,12 +62,17 @@ apiRouter.get("/chat/messages", async (req, res) => {
     .parse(req.query);
 
   const result = await ChatModel.findOne(
-    { _id: chatId, archived: { $ne: true } },
+    {
+      _id: chatId,
+      createdBy: req.context.token!.guest._id,
+      archived: { $ne: true },
+    },
     { messages: 1 }
   ).lean();
 
   if (!result) {
-    res.status(404);
+    res.status(400);
+    res.send("");
     return;
   }
 
@@ -81,12 +85,16 @@ apiRouter.get("/chat/:chatId/metadata", async (req, res) => {
   const chatId = objectIdSchema.parse(req.params.chatId);
 
   const result = await ChatModel.findOne(
-    { _id: chatId, archived: { $ne: true } },
+    {
+      _id: chatId,
+      createdBy: req.context.token!.guest._id,
+      archived: { $ne: true },
+    },
     { _id: 1, createdAt: 1, createdBy: 1, summary: 1 }
   );
 
   if (!result) {
-    res.status(404);
+    res.status(400).send("no chat found");
     return;
   }
 
@@ -110,7 +118,7 @@ apiRouter.post("/chat/update", async (req, res) => {
   });
 
   if (!chat) {
-    res.status(404);
+    res.status(404).send("no chat found");
     return;
   }
 
@@ -141,7 +149,7 @@ apiRouter.post("/chat/archive", async (req, res) => {
   });
 
   if (!chat) {
-    res.status(404);
+    res.status(404).send("no chat found");
     return;
   }
 

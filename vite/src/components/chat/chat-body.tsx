@@ -4,7 +4,7 @@ import {
   useQueryClient,
   useSuspenseQuery,
 } from "@tanstack/react-query";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { axiosInstance } from "../../services/axios-instance";
 import { AgentRole, Message, MessageInput } from "../../types";
 import MessageComponent from "../message";
@@ -25,10 +25,12 @@ import { enqueueSnackbar } from "notistack";
 import useOnSummaryChanges from "../../hooks/useOnSummaryChange";
 import EditMessageInput from "../edit-message-input";
 import LazyLoading from "../icons/lazy-loading";
+import ErrorNavigateBoundary from "../navigate-boundary";
 
 function ChatBody() {
-  const { chatId } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
+  const chatId = searchParams.get("chatId");
+
   const queryClient = useQueryClient();
 
   const lastMessageRef = useRef<HTMLDivElement>(null);
@@ -88,8 +90,9 @@ function ChatBody() {
         return data;
       }
 
-      throw new Error("chat not found");
+      throw new Error();
     },
+    retry: false,
     refetchOnMount: true,
   });
 
@@ -131,14 +134,14 @@ function ChatBody() {
 
       throw new Error("");
     },
-    onSettled(data) {
+    onSuccess(data) {
       if (data?.role === AgentRole.User) {
         promptGPT();
       }
     },
   });
 
-  const { mutate: promptMutation, isPending: isProompting } = useMutation({
+  const { mutateAsync: promptMutation, isPending: isProompting } = useMutation({
     async onError(error) {
       enqueueSnackbar({ variant: "error", message: error.message });
     },
@@ -183,9 +186,6 @@ function ChatBody() {
           throw new Error(`You've hit the rate limit`);
       }
     },
-    async onSuccess(newMessage) {
-      await persistMessage(newMessage);
-    },
   });
 
   const promptGPT = async () => {
@@ -194,7 +194,9 @@ function ChatBody() {
       role: AgentRole.Assistant,
     });
 
-    await promptMutation(assistMessage);
+    const newMessage = await promptMutation(assistMessage);
+
+    await persistMessage(newMessage);
   };
 
   useEffect(() => {
@@ -292,8 +294,10 @@ function ChatBody() {
 
 export default function ChatBodySuspense() {
   return (
-    <Suspense fallback={<LazyLoading size={50} />}>
-      <ChatBody />
-    </Suspense>
+    <ErrorNavigateBoundary>
+      <Suspense fallback={<LazyLoading size={50} />}>
+        <ChatBody />
+      </Suspense>
+    </ErrorNavigateBoundary>
   );
 }

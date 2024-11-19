@@ -9,7 +9,7 @@ export default function EmptyChat() {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const { mutate: startChat } = useMutation({
+  const { mutate: startChat, isPending } = useMutation({
     mutationFn: async (content: string) => {
       const { data, status } = await axiosInstance.post<{
         _id: string;
@@ -19,8 +19,8 @@ export default function EmptyChat() {
       });
 
       if (status === 201) {
-        queryClient.invalidateQueries({ queryKey: ["chats"] });
-        navigate(`/${data._id}?autoGen=true`);
+        queryClient.refetchQueries({ queryKey: ["chats"] });
+        navigate(`?chatId=${data._id}&autoGen=true`);
       }
     },
   });
@@ -30,7 +30,11 @@ export default function EmptyChat() {
   return (
     <div className="flex flex-col justify-center items-center h-full w-full max-w-[1200px] gap-[16px] p-[16px]">
       <span className="text-center font-bold text-[40px]">Ask away</span>
-      <InputBox className="text-[18px]" onSubmit={startChat} />
+      <InputBox
+        className="text-[18px] !w-[90%]"
+        onSubmit={startChat}
+        isGenerating={isPending}
+      />
     </div>
   );
 }

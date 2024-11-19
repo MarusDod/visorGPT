@@ -2,7 +2,6 @@ import { getModelForClass, plugin, prop } from "@typegoose/typegoose";
 import { Types } from "mongoose";
 import MongooseDelete from "mongoose-delete";
 import { z } from "zod";
-import { objectIdSchema } from "../utils";
 
 @plugin(MongooseDelete)
 export class AccountSchema {
@@ -22,7 +21,7 @@ export class AccountSchema {
 export const AccountModel = getModelForClass(AccountSchema);
 
 export const AccountDTO = z.object({
+  _id: z.coerce.string(),
   email: z.string().email(),
   name: z.string(),
-  guest: objectIdSchema,
 });

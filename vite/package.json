@@ -29,6 +29,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-dots-loader": "^1.1.4",
+    "react-error-boundary": "^4.1.2",
     "react-loading": "^2.0.3",
     "react-router-dom": "^6.28.0"
   },

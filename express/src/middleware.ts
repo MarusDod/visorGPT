@@ -13,7 +13,7 @@ export async function authMiddleware(
   res: Response,
   next: NextFunction
 ) {
-  if (req.cookies.authorization) {
+  if (!!req.cookies.authorization) {
     const token = (await SessionTokenModel.findOne({
       _id: new Types.ObjectId(req.cookies.authorization as string),
     })

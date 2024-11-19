@@ -84,7 +84,7 @@ completionRouter.post("/persistMessage", async (req, res) => {
   const chat = await ChatModel.findOne({ _id: chatId });
 
   if (!chat) {
-    res.status(404);
+    res.status(404).send("no chat found");
     return;
   }
 

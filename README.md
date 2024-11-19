@@ -9,6 +9,6 @@ setup locally:
 
 there is an .env.example in each project folder
 
-# DEMO
+## DEMO
 
 the site is hosted at: <https://visorgpt-vite.onrender.com/>

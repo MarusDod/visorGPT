@@ -19,3 +19,9 @@ export type Chat = {
   createdBy: string;
   createdAt: string;
 };
+
+export type Account = {
+  _id: string;
+  email: string;
+  name: string;
+};

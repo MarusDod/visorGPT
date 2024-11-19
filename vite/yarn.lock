@@ -3373,6 +3373,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-error-boundary@npm:^4.1.2":
+  version: 4.1.2
+  resolution: "react-error-boundary@npm:4.1.2"
+  dependencies:
+    "@babel/runtime": "npm:^7.12.5"
+  peerDependencies:
+    react: ">=16.13.1"
+  checksum: 10c0/0737e5259bed40ce14eb0823b3c7b152171921f2179e604f48f3913490cdc594d6c22d43d7abb4ffb1512c832850228db07aa69d3b941db324953a5e393cb399
+  languageName: node
+  linkType: hard
+
 "react-inline-block@npm:^2.1.3":
   version: 2.1.3
   resolution: "react-inline-block@npm:2.1.3"
@@ -4091,6 +4102,7 @@ __metadata:
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
     react-dots-loader: "npm:^1.1.4"
+    react-error-boundary: "npm:^4.1.2"
     react-loading: "npm:^2.0.3"
     react-router-dom: "npm:^6.28.0"
     tailwindcss: "npm:^3.4.14"
